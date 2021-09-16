@@ -11,6 +11,8 @@ const Home=()=>{
         <Topbar/>
         <div className="homeContainer">
         <Sidebar/>
+        <Feed/>
+        <Rigthbar/>
         </div>
         </>
     )

@@ -4,6 +4,7 @@
     overflow-y: scroll;
     position: sticky;
     top: 50px;
+    background-color: rgb(245, 245, 245);
   }
   
   ::-webkit-scrollbar {
@@ -42,6 +43,7 @@
     padding: 10px;
     border-radius: 5px;
     font-weight: 500;
+    background-color: #029964;
   }
   
   .sidebarHr {
