@@ -1,10 +1,13 @@
 import './App.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import {Switch,Route} from 'react-router-dom';
+import Home from './pages/Home.jsx';
 function App() {
   return (
-    <div className="App">
-      <h1>ChatApp</h1>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home}></Route>
+    </Switch>
   );
 }
 
