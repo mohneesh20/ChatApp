@@ -1,13 +1,13 @@
 import "./rightbar.css";
 // import { Users } from "../../dummyData";
-// import Online from "../online/Online";
+import Online from "../online/Online";
 
 export default function Rightbar({ profile }) {
   const HomeRightbar = () => {
     return (
       <>
         <div className="birthdayContainer">
-          <img className="birthdayImg" src="assets/gift.png" alt="" />
+          <img className="birthdayImg" src="assets/person.png" alt="" />
           <span className="birthdayText">
             <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
           </span>
