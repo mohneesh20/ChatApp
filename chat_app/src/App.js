@@ -1,13 +1,33 @@
-import './App.css';
-import "bootstrap/dist/css/bootstrap.min.css";
-import React from 'react';
-import {Switch,Route} from 'react-router-dom';
-import Home from './pages/Home.jsx';
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
+import Register from "./pages/Register/Register";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+
 function App() {
+  const { user } = useContext(AuthContext);
   return (
-    <Switch>
-      <Route exact path="/" component={Home}></Route>
-    </Switch>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {user ? <Home /> : <Register />}
+        </Route>
+        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/register">
+          {user ? <Redirect to="/" /> : <Register />}
+        </Route>
+        <Route path="/profile/:username">
+          <Profile />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

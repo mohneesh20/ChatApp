@@ -4,11 +4,13 @@ const dotenv=require('dotenv');
 const morgan=require('morgan');
 const helmet=require('helmet');
 const cors=require('cors');
+const multer=require('multer');
+const path=require('path');
 dotenv.config();
 const app=express();
 app.use(cors());
 app.use(express.json());
-const path=require('path');
+// const path=require('path');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(helmet());
@@ -21,6 +23,23 @@ mongoose.connect(process.env.DB_STRING, {useNewUrlParser:true,useUnifiedTopology
 }).catch((err)=>{
     console.log(err);
 });
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "public/images");
+    },
+    filename: (req, file, cb) => {
+      cb(null, req.body.name);
+    },
+});  
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
+    try {
+      return res.status(200).json("File uploded successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  });
 app.use('/api/user',userRoute);
 app.use('/api/auth',authRoute);
 app.use('/api/post',postRoute);

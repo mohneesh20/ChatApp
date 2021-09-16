@@ -7,6 +7,7 @@
   position: sticky;
   top: 0;
   z-index: 999;
+  font-family: "Roboto Mono",monospace;
 }
 
 .topbarLeft {
@@ -54,6 +55,8 @@
   align-items: center;
   justify-content: space-around;
   color: white;
+  font-weight: bold;
+  /* font-size: 20px; */
 }
 
 .topbarLink {
