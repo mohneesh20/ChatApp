@@ -1,6 +1,7 @@
 .homeContainer{
     display: flex;
     width: 100%;
-    background-color: bisque;
-    height:100vh;
+    /* background-color: bisque; */
+    /* height:100vh; */
+    /* font-family: "Roboto Mono",monospace; */
 }
