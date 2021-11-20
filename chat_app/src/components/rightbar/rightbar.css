@@ -83,6 +83,7 @@
     height: 100px;
     object-fit: cover;
     border-radius: 5px;
+    border-radius: 50%;
   }
   .rightbarFollowButton{
     margin-top:30px;
@@ -98,4 +99,7 @@
     font-weight: 500;
     cursor: pointer;
     justify-content: space-around;
+  }
+  .rightbarFollowingName{
+    align-self: center;
   }
