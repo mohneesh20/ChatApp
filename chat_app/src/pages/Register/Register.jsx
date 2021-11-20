@@ -13,7 +13,7 @@ export default function Register() {
   const handleClick = async (e) => {
     e.preventDefault();
     if (passwordAgain.current.value !== password.current.value) {
-      passwordAgain.current.setCustomValidity("Passwords don't match!");
+      alert("PASSWORDS DO NOT MATCH");
     } else {
       const user = {
         username: username.current.value,
@@ -21,8 +21,8 @@ export default function Register() {
         password: password.current.value,
       };
       try {
-        await api.post("/api/auth/register", user);
-        history.push("/login");
+        await api.post("/auth/register",user);
+        await history.push("/login");
       } catch (err) {
         console.log(err);
       }
@@ -33,46 +33,41 @@ export default function Register() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Lamasocial</h3>
+          <h3 className="loginLogo">CONNECT</h3>
           <span className="loginDesc">
-            Connect with friends and the world around you on Lamasocial.
+            Connect with friends and the world around you.
           </span>
         </div>
         <div className="loginRight">
-          <form className="loginBox" onSubmit={handleClick}>
+          <div className="loginBox">
             <input
               placeholder="Username"
-              required
               ref={username}
               className="loginInput"
             />
             <input
               placeholder="Email"
-              required
               ref={email}
               className="loginInput"
               type="email"
             />
             <input
               placeholder="Password"
-              required
               ref={password}
               className="loginInput"
-              type="password"
-              minLength="6"
+              type="text"
             />
             <input
               placeholder="Password Again"
-              required
               ref={passwordAgain}
               className="loginInput"
-              type="password"
+              type="text"
             />
-            <button className="loginButton" type="submit">
-              Sign Up
+            <button className="loginButton" onClick={handleClick}>
+              R E G I S T E R
             </button>
-            <button className="loginRegisterButton">Log into Account</button>
-          </form>
+            <button className="loginRegisterButton" onClick={()=>history.push('/login')}>L O G I N</button>
+          </div>
         </div>
       </div>
     </div>

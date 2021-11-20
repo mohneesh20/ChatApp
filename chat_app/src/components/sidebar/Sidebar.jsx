@@ -10,10 +10,23 @@ import {
   Event,
   School,
 } from "@material-ui/icons";
-// import { Users } from "../../dummyData";
+import { useContext } from "react";
 // import CloseFriend from "../closeFriend/Closefriend";
-
+import { AuthContext } from "../../context/AuthContext";
+import { useHistory } from "react-router";
 export default function Sidebar() {
+  const {dispatch}=useContext(AuthContext);
+  const history=useHistory();
+  const logout=async()=>{
+    try{
+      await localStorage.removeItem("user");
+      dispatch({type:"LOGOUT"});
+      history.push('/');
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -55,12 +68,9 @@ export default function Sidebar() {
             <span className="sidebarListItemText">Courses</span>
           </li>
         </ul>
-        <button className="sidebarButton">Show More</button>
+        <button className="sidebarButton" onClick={logout}>LOGOUT</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          {/* {Users.map((u) => (
-            <CloseFriend key={u.id} user={u} />
-          ))} */}
         </ul>
       </div>
     </div>

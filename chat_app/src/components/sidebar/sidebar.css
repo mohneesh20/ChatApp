@@ -41,11 +41,17 @@
     width: 150px;
     border: none;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 2px;
     font-weight: 500;
     background-color: #029964;
+    color: white;
+    letter-spacing: 2px;
+    font-size: larger;
+    transition: all 0.1s ease-in-out;
   }
-  
+  .sidebarButton:active{
+    background-color: #015e3d;
+  }
   .sidebarHr {
     margin: 20px 0;
   }

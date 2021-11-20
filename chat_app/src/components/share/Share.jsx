@@ -28,15 +28,18 @@ export default function Share() {
       data.append("name", fileName);
       data.append("file", file);
       newPost.img = fileName;
-      console.log(newPost);
       try {
         await api.post("/upload", data);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     }
     try {
-      await api.post("/api/posts", newPost);
+      await api.post("/post", newPost);
       window.location.reload();
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -61,11 +64,11 @@ export default function Share() {
         <hr className="shareHr" />
         {file && (
           <div className="shareImgContainer">
-            <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
+            <img className="shareImg" src={URL.createObjectURL(file)} width='100%' height='300px' alt="" />
             <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
           </div>
         )}
-        <form className="shareBottom" onSubmit={submitHandler}>
+        <div className="shareBottom" >
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
               <PermMedia htmlColor="tomato" className="shareIcon" />
@@ -91,10 +94,10 @@ export default function Share() {
               <span className="shareOptionText">Feelings</span>
             </div>
           </div>
-          <button className="shareButton" type="submit">
-            Share
+          <button className="shareButton" onClick={submitHandler}>
+            SHARE
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

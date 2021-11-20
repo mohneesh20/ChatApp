@@ -2,7 +2,7 @@ import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import { useContext, useEffect, useState } from "react";
 import api from "../../backApi";
-import { format } from "timeago";
+import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -12,22 +12,26 @@ export default function Post({ post }) {
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
-
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes]);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const res = await api.get(`/api/users?userId=${post.userId}`);
-      setUser(res.data);
-    };
-    fetchUser();
+    try{
+      const fetchUser = async () => {
+        const res = await api.get(`/user?userId=${post.userId}`);
+        setUser(res.data);
+      };
+      fetchUser();
+    }
+    catch(err){
+      console.log(err);
+    }
   }, [post.userId]);
 
   const likeHandler = () => {
     try {
-      api.put("/api/posts/" + post._id + "/like", { userId: currentUser._id });
+      api.put("/post/" + post._id + "/like", { userId: currentUser._id });
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -37,7 +41,7 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`/api/profile/${user.username}`}>
+            <Link to={`/profile/`+user.username}>
               <img
                 className="postProfileImg"
                 src={
@@ -49,7 +53,7 @@ export default function Post({ post }) {
               />
             </Link>
             <span className="postUsername">{user.username}</span>
-            <span className="postDate">{format(post.createdAt)}</span>
+            <span className="postDate">{format(post.createdAt).toUpperCase()}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />

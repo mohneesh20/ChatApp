@@ -1,38 +1,39 @@
 const router = require("express").Router();
 const User = require("../modals/User");
 const bcrypt = require("bcrypt");
-
-//REGISTER
 router.post("/register", async (req, res) => {
   try {
-    //generate new password
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-    //create new user
-    const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword,
-    });
-
-    //save user and respond
-    const user = await newUser.save();
-    res.status(200).json(user);
+    req.body.password = await bcrypt.hash(req.body.password, salt);
+    await User.create(req.body,(err,result)=>{
+      if(err){
+        console.log("ERR:"+err);
+        res.send(err);
+        return;
+      }
+      console.log(result);
+      res.set('json');
+      res.json({'msg':'RECORD INSERTED'});
+    })
   } catch (err) {
     res.status(500).json(err)
   }
 });
-
-//LOGIN
 router.post("/login", async (req, res) => {
+  // console.log(JSON.stringify(req.body));
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(404).json("user not found");
-
+    if(!user){
+      // console.log("User not found");
+      return res.status(404).json("User Not Found");
+    }
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    !validPassword && res.status(400).json("wrong password")
-
+    if(!validPassword){
+      // console.log("Login unsuccessfull");
+      return res.status(404).json("Wrong password");
+    }
+    console.log("Login successfull");
+    // console.log(user);
     res.status(200).json(user)
   } catch (err) {
     res.status(500).json(err)

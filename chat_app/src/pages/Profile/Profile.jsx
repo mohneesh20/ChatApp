@@ -10,12 +10,16 @@ import { useParams } from "react-router";
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
-  const username = useParams().username;
-
+  const {username} = useParams();
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await api.get(`/api/users?username=${username}`);
-      setUser(res.data);
+      try{
+        const res = await api.get(`/user?username=`+username);
+        setUser(res.data);
+      }
+      catch(err){
+        console.log(err);
+      }
     };
     fetchUser();
   }, [username]);
@@ -33,7 +37,7 @@ export default function Profile() {
                 src={
                   user.coverPicture
                     ? PF + user.coverPicture
-                    : PF + "person/noCover.png"
+                    : PF + "person/ad.png"
                 }
                 alt=""
               />

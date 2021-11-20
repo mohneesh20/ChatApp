@@ -1,5 +1,8 @@
 .rightbar {
     flex: 3.5;
+    background-color: rgb(236, 236, 236);
+    padding: 0 10px;
+    border-radius: 2px;
   }
   
   .rightbarWrapper {
@@ -80,4 +83,19 @@
     height: 100px;
     object-fit: cover;
     border-radius: 5px;
+  }
+  .rightbarFollowButton{
+    margin-top:30px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: rgb(14, 179, 115);
+    color: white;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    font-size: large;
+    padding: px 10px;
+    font-weight: 500;
+    cursor: pointer;
+    justify-content: space-around;
   }

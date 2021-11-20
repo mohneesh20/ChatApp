@@ -23,7 +23,7 @@ const AuthReducer = (state, action) => {
           ...state,
           user: {
             ...state.user,
-            followings: [...state.user.followings, action.payload],
+            following: [...state.user.following, action.payload],
           },
         };
       case "UNFOLLOW":
@@ -31,10 +31,16 @@ const AuthReducer = (state, action) => {
           ...state,
           user: {
             ...state.user,
-            followings: state.user.followings.filter(
-              (following) => following !== action.payload
+            following: state.user.following.filter(
+              (follow) => follow !== action.payload
             ),
           },
+        };
+      case "LOGOUT":
+        return {
+          user:null,
+          isFetching:false,
+          error:false
         };
       default:
         return state;

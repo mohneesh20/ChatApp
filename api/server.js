@@ -23,10 +23,10 @@ mongoose.connect(process.env.DB_STRING, {useNewUrlParser:true,useUnifiedTopology
 }).catch((err)=>{
     console.log(err);
 });
-app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use("/images", express.static(path.join(__dirname, "..","chat_app","public","images")));
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "public/images");
+      cb(null, "../chat_app/public/images");
     },
     filename: (req, file, cb) => {
       cb(null, req.body.name);
@@ -35,6 +35,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
     try {
+    console.log("FILE UPLOADED");
       return res.status(200).json("File uploded successfully");
     } catch (error) {
       console.error(error);
