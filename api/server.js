@@ -10,7 +10,7 @@ dotenv.config();
 const app=express();
 app.use(cors());
 app.use(express.json());
-// const path=require('path');
+const path=require('path');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(helmet());
@@ -18,6 +18,8 @@ app.use(morgan('common'));
 const userRoute=require('./Routes/user.js');
 const authRoute=require('./Routes/auth.js');
 const postRoute=require('./Routes/post.js');
+const conversationRoute=require('./Routes/conversations.js');
+const messageRoute=require('./Routes/messages.js');
 mongoose.connect(process.env.DB_STRING, {useNewUrlParser:true,useUnifiedTopology: true}).then(()=>{
     console.log("CONNECTED");
 }).catch((err)=>{
@@ -44,6 +46,8 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 app.use('/api/user',userRoute);
 app.use('/api/auth',authRoute);
 app.use('/api/post',postRoute);
+app.use("/api/conversations",conversationRoute);
+app.use("/api/messages",messageRoute);
 app.listen(process.env.PORT,()=>{
     console.log("SERVER STARTED");
 });
