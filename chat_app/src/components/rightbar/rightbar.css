@@ -1,8 +1,9 @@
 .rightbar {
     flex: 3.5;
     background-color: rgb(236, 236, 236);
-    padding: 0 10px;
+    padding:10px;
     border-radius: 2px;
+    /* justify-content: flex-start; */
   }
   
   .rightbarWrapper {
@@ -68,7 +69,7 @@
   .rightbarFollowings{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   
   .rightbarFollowing{
@@ -76,6 +77,7 @@
     flex-direction: column;
     margin-bottom: 20px;
     cursor: pointer;
+    margin: 5px;
   }
   
   .rightbarFollowingImg{

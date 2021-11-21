@@ -3,10 +3,17 @@ import { Search} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-
+import { SearchContext } from "../../context/SearchContext";
+import { useRef } from "react";
 export default function Topbar() {
   const { user } = useContext(AuthContext);
+  const {dispatch} = useContext(SearchContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const searchTxt=useRef();
+  const SearchPeople=(e)=>{
+    e.preventDefault();
+    dispatch({type:"Search_People",payload:searchTxt.current.value})
+  }
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -16,10 +23,11 @@ export default function Topbar() {
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
-          <Search className="searchIcon" />
+          <Search className="searchIcon" onClick={SearchPeople}/>
           <input
             placeholder="Search for friend, post or video"
             className="searchInput"
+            ref={searchTxt}
           />
         </div>
       </div>
@@ -38,7 +46,7 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div> */}
-        <Link to={`/profile/${user.username}`}>
+        <Link to={`/profile/${user.username}`} style={{margin:'5px'}}>
           <img
             src={
               user.profilePicture
@@ -49,6 +57,7 @@ export default function Topbar() {
             className="topbarImg"
           />
         </Link>
+        <span style={{color:'white',margin:'5px',fontSize:'20px'}}>{user.username}</span>
       </div>
     </div>
   );

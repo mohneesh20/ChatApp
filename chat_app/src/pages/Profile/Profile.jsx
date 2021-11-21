@@ -12,20 +12,26 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const {username} = useParams();
   useEffect(() => {
-    if(user===undefined){
-      window.location.href="/";
-      return;
+    try{
+      if(user===undefined){
+        window.location.href="/";
+        return;
+      }
+      const fetchUser = async () => {
+        try{
+          const res = await api.get(`/user?username=`+username);
+          setUser(res.data);
+        }
+        catch(err){
+          console.log(err);
+        }
+      };
+      fetchUser();
     }
-    const fetchUser = async () => {
-      try{
-        const res = await api.get(`/user?username=`+username);
-        setUser(res.data);
-      }
-      catch(err){
-        console.log(err);
-      }
-    };
-    fetchUser();
+    catch(err){
+      console.log(err);
+      window.location.href="/";
+    }
   }, [username]);
 
   return (

@@ -6,7 +6,7 @@ import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-export default function Post({ post }) {
+export default function Post({ post}) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
@@ -79,9 +79,9 @@ export default function Post({ post }) {
             />
             <span className="postLikeCounter">{like} people like it</span>
           </div>
-          <div className="postBottomRight">
+          {/* <div className="postBottomRight">
             <span className="postCommentText">{post.comment} comments</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -10,10 +10,18 @@ export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [followed, setFollowed] = useState(
-    currentUser.following.includes(user?.id)
-  );
-
+  const [followed, setFollowed] = useState(false);
+  // console.log(followed);
+  useEffect(() => {
+    if(user===undefined){
+      return;
+    }
+    let id=user._id;
+    console.log(currentUser.following);
+    const res=currentUser.following.includes(id);
+    setFollowed(res);
+    // console.log(res+":"+id);
+  }, [followed,user])
   useEffect(() => {
     const getFriends = async () => {
       try {
@@ -30,20 +38,27 @@ export default function Rightbar({ user }) {
   }, [user]);
 
   const handleClick = async () => {
+    // alert(followed);
     try {
       if (followed) {
-        await api.put(`/user/${user._id}/unfollow`, {
+        const res=await api.put(`/user/${user._id}/unfollow`, {
           userId: currentUser._id,
         });
-        dispatch({ type: "UNFOLLOW", payload: user._id });
+        if(res.status!=403){
+          dispatch({ type: "UNFOLLOW", payload: user._id });
+        }
       } else {
-        await api.put(`/user/${user._id}/follow`, {
+        const res=await api.put(`/user/${user._id}/follow`, {
           userId: currentUser._id,
         });
-        dispatch({ type: "FOLLOW", payload: user._id });
+        // alert(res.status);
+        if(res.status!=403){
+          dispatch({ type: "FOLLOW", payload: user._id });
+        }
       }
       setFollowed(!followed);
     } catch (err) {
+      console.log(err);
     }
   };
 
@@ -55,9 +70,9 @@ export default function Rightbar({ user }) {
           <span className="birthdayText">
             <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
           </span>
-        </div>
+        </div> */}
         <img className="rightbarAd" src={PF+`/person/ad.png`} alt="" />
-        <h4 className="rightbarTitle">Online Friends</h4> */}
+        {/* <h4 className="rightbarTitle">Online Friends</h4> */}
       </>
     );
   };
@@ -84,7 +99,7 @@ export default function Rightbar({ user }) {
             <Link
               to={"/profile/" + friend.username}
               style={{ textDecoration: "none" }}
-            key={user._id}>
+            key={friend._id}>
               <div className="rightbarFollowing">
                 <img
                   src={

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
+.findfriends{
+    flex:5.5;
+    font-family: "Roboto Mono",monospace;
+}
+
+.findfriendsWrapper{
+    padding: 20px;
+}
+.people {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: rgb(255, 232, 157);
+    border-radius: 5px;
+  }
+  
+  .people:hover {
+    background-color: wheat;
+  }
+  
+  .peopleImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .peopleName {
+    font-weight: 500;
+    font-size: 50px;
+    font-family: 'Cedarville Cursive', cursive;
+  }
+  
