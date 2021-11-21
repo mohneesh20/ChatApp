@@ -12,6 +12,10 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const {username} = useParams();
   useEffect(() => {
+    if(user===undefined){
+      window.location.href="/";
+      return;
+    }
     const fetchUser = async () => {
       try{
         const res = await api.get(`/user?username=`+username);

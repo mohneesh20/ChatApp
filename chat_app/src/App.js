@@ -2,6 +2,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import Register from "./pages/Register/Register";
+import Messenger from "./pages/Messenger/Messenger";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +14,7 @@ import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const { user } = useContext(AuthContext);
+  // alert(JSON.stringify(user));
   return (
     <Router>
       <Switch>
@@ -22,10 +24,13 @@ function App() {
         <Route path="/login">
           {user ? <Redirect to="/" /> : <Login />}
           </Route>
-        <Route path="/register">
+          <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}
         </Route>
-        <Route path="/profile/:username">
+        <Route path="/messenger">
+          {!user ? <Redirect to="/" /> : <Messenger />}
+        </Route>
+        <Route exact path="/profile/:username">
           <Profile />
         </Route>
       </Switch>

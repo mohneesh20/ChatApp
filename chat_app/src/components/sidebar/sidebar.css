@@ -30,9 +30,15 @@
   .sidebarListItem {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    padding: 2px 5px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 500;
   }
-  
+  .sidebarListItem:hover {
+    background-color: rgb(221, 221, 221);
+  }
   .sidebarIcon {
     margin-right: 15px;
   }

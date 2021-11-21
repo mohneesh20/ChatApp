@@ -11,6 +11,7 @@ import {
   School,
 } from "@material-ui/icons";
 import { useContext } from "react";
+import {Link} from 'react-router-dom';
 // import CloseFriend from "../closeFriend/Closefriend";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router";
@@ -31,14 +32,18 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
+        <Link to="/" style={{textDecoration:'none',color:'black'}}>
           <li className="sidebarListItem">
             <RssFeed className="sidebarIcon" />
             <span className="sidebarListItemText">Feed</span>
           </li>
+          </Link>
+          <Link to="/messenger" style={{textDecoration:'none',color:'black'}}>
           <li className="sidebarListItem">
             <Chat className="sidebarIcon" />
             <span className="sidebarListItemText">Chats</span>
           </li>
+          </Link>
           <li className="sidebarListItem">
             <PlayCircleFilledOutlined className="sidebarIcon" />
             <span className="sidebarListItemText">Videos</span>

@@ -17,7 +17,7 @@ export default function Rightbar({ user }) {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        if(user==undefined||user._id==undefined){
+        if(user===undefined||user._id===undefined){
           return;
         }
           const friendList = await api.get("/user/friends/" + user._id);
@@ -71,14 +71,14 @@ export default function Rightbar({ user }) {
             {followed ? <Remove /> : <Add />}
           </button>
         )}
-        <h4 className="rightbarTitle">User information</h4>
+        <h4 className="rightbarTitle">User Information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">City:</span>
             <span className="rightbarInfoValue">{user.city}</span>
           </div>
         </div>
-        <h4 className="rightbarTitle">User friends</h4>
+        <h4 className="rightbarTitle">User Friends</h4>
         <div className="rightbarFollowings">
           {friends.map((friend) => (
             <Link
