@@ -5,7 +5,6 @@ const morgan=require('morgan');
 const helmet=require('helmet');
 const cors=require('cors');
 const multer=require('multer');
-const path=require('path');
 dotenv.config();
 const app=express();
 app.use(cors());
