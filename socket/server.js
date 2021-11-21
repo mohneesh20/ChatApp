@@ -20,7 +20,7 @@ io.on("connection", (socket) => {
     console.log("USER CONNECTED.");
   
     //take userId and socketId from user
-    socket.on("addUsers", (userId) => {
+socket.on("addUsers", (userId) => {
       addUsers(userId, socket.id);
       io.emit("getUsers", users);
 });
