@@ -14,6 +14,9 @@ export default function Topbar() {
     e.preventDefault();
     dispatch({type:"Search_People",payload:searchTxt.current.value})
   }
+  if(user===null){
+    window.location.href="/";
+  }
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">

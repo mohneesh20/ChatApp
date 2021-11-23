@@ -11,6 +11,8 @@ export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
+  // const [file, setFile] = useState(user.profilePicture);
+
   // console.log(followed);
   useEffect(() => {
     if(user===undefined){
@@ -92,6 +94,18 @@ export default function Rightbar({ user }) {
             <span className="rightbarInfoKey">City:</span>
             <span className="rightbarInfoValue">{user.city}</span>
           </div>
+          {/* <div className="rightbarInfoItem">
+          <label htmlFor="file" className="updateOption">
+              <span className="shareOptionText">UPDATE PROFILE PIC</span>
+              <input
+                style={{ display: "none" }}
+                type="file"
+                id="file"
+                accept=".png,.jpeg,.jpg"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </label>
+          </div> */}
         </div>
         <h4 className="rightbarTitle">User Friends</h4>
         <div className="rightbarFollowings">

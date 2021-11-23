@@ -105,3 +105,15 @@
   .rightbarFollowingName{
     align-self: center;
   }
+.updateOption{
+  background-color: green;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color:white;
+  padding: 5px;
+  border-radius: 2px;
+  transition: all 1s ease;
+}
+.updateOption:active{
+  background-color: black;
+}
